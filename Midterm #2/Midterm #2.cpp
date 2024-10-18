@@ -111,36 +111,47 @@ void CoffeeShop(string names[], int nameCount) {
     cout << "Resulting line:\n";
     queue.print(); 
 
-    
     for (int t = 1; t <= TIME_PERIODS; ++t) {
         cout << "Time step #" << t << ":\n";
 
         // Check for 40% chance of serving the first customer
         if (!queue.is_empty() && random(1, 100) <= 40) {
-            
+            string servedCustomer = queue.get_head()->data;
+            queue.pop_front();
+            cout << "    " << servedCustomer << " is served\n";
         }
 
         // Check for 60% chance of new customer joining
         if (random(1, 100) <= 60) {
-            
+            string newCustomer = names[random(0, nameCount - 1)];
+            queue.push_back(newCustomer);
+            cout << "    " << newCustomer << " joins the line\n";
         }
 
         // Check for 20% chance of last customer leaving
         if (!queue.is_empty() && random(1, 100) <= 20) {
-          
+            string leavingCustomer = queue.get_tail()->data;
+            queue.pop_back();
+            cout << "    " << leavingCustomer << " exits the rear of the line\n";
         }
 
-        // Check for 10% chance of any particular customer leaving
+        // Check for 10% chance of any customer leaving
         if (!queue.is_empty() && random(1, 100) <= 10) {
-            
+            string leavingCustomer = queue.get_head()->data;
+            queue.pop_front();
+            cout << "    " << leavingCustomer << " leaves the line\n";
         }
 
         // Check for 10% chance of VIP customer
         if (random(1, 100) <= 10) {
-           
+            string vipCustomer = names[random(0, nameCount - 1)];
+            queue.push_front(vipCustomer);  // VIP go frnot
+            cout << "    " << vipCustomer << " (VIP) joins the front of the line\n";
         }
 
-        
+        // Print the current queue
+        cout << "Resulting line:\n";
+        queue.print();  // Print the queue 
     }
 }
 
