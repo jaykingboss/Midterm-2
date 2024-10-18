@@ -92,17 +92,66 @@ public:
     }
 };
 
-// Function to generate a random number between min and max
 int random(int min, int max) {
     return (rand() % (max - min + 1)) + min;
 }
 
-// Main simulation function
-void simulateCoffeeShop(string names[], int nameCount) {
+void CoffeeShop(string names[], int nameCount) {
     DoublyLinkedList queue;
     srand(1);  // random number 
 
-   
+    // Initial customer addition at the start
+    cout << "Store opens:\n";
+    for (int i = 0; i < NUM_CUSTOMERS; ++i) {
+        string name = names[random(0, nameCount - 1)];
+        queue.push_back(name);
+        cout << "    " << name << " joins the line\n";
+    }
+
+    cout << "Resulting line:\n";
+    queue.print(); 
+
+    
+    for (int t = 1; t <= TIME_PERIODS; ++t) {
+        cout << "Time step #" << t << ":\n";
+
+        // Check for 40% chance of serving the first customer
+        if (!queue.is_empty() && random(1, 100) <= 40) {
+            
+        }
+
+        // Check for 60% chance of new customer joining
+        if (random(1, 100) <= 60) {
+            
+        }
+
+        // Check for 20% chance of last customer leaving
+        if (!queue.is_empty() && random(1, 100) <= 20) {
+          
+        }
+
+        // Check for 10% chance of any particular customer leaving
+        if (!queue.is_empty() && random(1, 100) <= 10) {
+            
+        }
+
+        // Check for 10% chance of VIP customer
+        if (random(1, 100) <= 10) {
+           
+        }
+
+        
     }
 }
 
+int main() {
+    string names[MAX_NAMES] = {
+        "Jean", "Iris", "Omar", "Andy", "Drew",
+        "Leah", "Hope", "Mia", "Liam", "Noah",
+        "Emma", "Sophia", "Olivia", "Ava", "Isabella",
+        "Lucas", "Ethan", "Mason", "Logan", "James"
+    };  
+    int nameCount = 20;  
+    CoffeeShop(names, nameCount);  
+    return 0;
+}
